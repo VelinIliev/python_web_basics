@@ -56,3 +56,7 @@ def show_not_found(request):
     # return HttpResponse("Error", status=status_code)
     # get_object_or_404()
     raise Http404("Not found!")
+
+
+def index(request):
+    return render(request, 'index.html')
