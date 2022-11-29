@@ -1,0 +1,16 @@
+body {
+    padding: 10px;
+}
+h1 {
+    text-decoration: underline;
+}
+p{
+    color: purple;
+}
+a{
+    color: red;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

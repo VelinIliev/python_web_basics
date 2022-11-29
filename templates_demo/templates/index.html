@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+{% load filters %}
+{% load my_tags %}
+
+{% block page_content %}
+<body>
+    <p>{{ value }}</p>
+    <p>{{ info.address }}</p>
+    <p>{{ student.get_info }}</p>
+    <p>{{ student_info }}</p>
+    <br>
+    <!-- filters -->
+    <!-- https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#built-in-filter-reference -->
+    <p>{{ title|upper }}</p>
+    <p>{{ title|lower }}</p>
+    <p>{{ title|add:'2' }}</p>
+    <p>{{ title|capfirst }}</p>
+    <p>{{ title|lower|capfirst }}</p>
+    <p>{{ 2|add:3|add:5 }}</p>
+    <p>{{ title|truncatechars:5 }}</p>
+    <p>{{ some_list|join:", " }}</p>
+    <p>{{ some_date }}</p>
+    <p>{{ some_date|date:'d-m-Y'}}</p>
+    <p>{{ value|floatformat:2 }}</p>
+    <br>
+    <!-- DJANGO IF TAG -->
+    {% if students %}
+        {{ students|join:", " }}
+    {% else %}
+        {{  'No students'}}
+    {% endif %}
+    <!-- DJANGO FOR TAG -->
+    <ul class="list-group"> Students:
+    {% for student in students %}
+        <li class="list-group-item">{{ student }}</li>
+    {% empty %}
+        <li>No students</li>
+    {% endfor %}
+    </ul>
+    <!-- DJANGO IF CHANGED TAG -->
+    <ul>
+    {% for student in students %}
+        {% ifchanged student %}
+        <li>{{ student }}</li>
+        {% endifchanged %}
+    {% empty %}
+        <li>No students</li>
+    {% endfor %}
+    </ul>
+    <!-- DJANGO URL TAG -->
+    <a href="{% url 'index' %}">{% url 'index' %}</a>
+    <br>
+    <a href="{% url 'redirect to home' %}">{% url 'redirect to home' %}</a>
+    <br>
+    <!-- csrf_token -->
+{#    {{ csrf_token }}#}
+    {% csrf_token %}
+    <!-- custom filters -->
+    <p>{{ values }}</p>
+    <p>{{ values|odd }}</p>
+    <p>{{ some_date|app_style }}</p>
+    <!-- custom tags -->
+    <p>{% student_info student %}</p>
+{#    {% simple_tag %}#}
+    <p>{% simple_tag %}</p>
+    <p>{% simple_tag 17 'Velko' True 0.1 %}</p>
+    <!-- TAG NAV -->
+    {%  app_nav 'index' 'redirect to home' 'about' %}
+
+{% endblock %}
