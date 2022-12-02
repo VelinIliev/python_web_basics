@@ -7,28 +7,29 @@ from models_demos.web.models import Employee, Department, Project, AccessCard
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'last_name', 'level', 'department')
-    list_filter = ('level',)
-    search_fields = ('first_name', 'last_name',)
+    pass
+#     list_display = ('id', 'first_name', 'last_name', 'level', 'department')
+#     list_filter = ('level',)
+#     search_fields = ('first_name', 'last_name',)
 
-    fieldsets = (
-        ("Personal info",
-             {
-                'fields': ('first_name', 'last_name'),
-             }
-         ),
-        ('Professional info',
-            {
-                'fields': ('level', 'years_of_experience'),
-            }
-         ),
-        ('Company info',
-            {
-                'fields': ('email', 'department')
-            }
-
-        )
-    )
+    # fieldsets = (
+    #     ("Personal info",
+    #          {
+    #             'fields': ('first_name', 'last_name'),
+    #          }
+    #      ),
+    #     ('Professional info',
+    #         {
+    #             'fields': ('level', 'years_of_experience'),
+    #         }
+    #      ),
+    #     ('Company info',
+    #         {
+    #             'fields': ('email', 'department')
+    #         }
+    #
+    #     )
+    # )
 
 
 @admin.register(Department)

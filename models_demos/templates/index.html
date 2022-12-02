@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+{#    From memomory#}
+    <p style="text-decoration: underline">From memory</p>
+    {% for employee in employees %}
+
+        <p>{{ employee.first_name }} {{ employee.last_name }} -
+            {{ employee.department.name }}, {{ employee.level }}
+            (AGE: {{ employee.age }}, Experience: {{ employee.years_of_experience }})</p>
+    {% endfor %}
+</ul>
+<br>
+<ul style = "color: red">
+{#    From DB#}
+    <p style="text-decoration: underline">From DB</p>
+    {% for employee in employees2 %}
+
+        <p>{{ employee.fullname }} {{ employee.years_of_employment }} -
+            {{ employee.department.name }}, {{ employee.level }}
+            (AGE: {{ employee.age }}, Experience: {{ employee.years_of_experience }})</p>
+        <a href="{% url 'delete employee' pk=employee.pk %}">Delete</a>
+        <a href="{{ employee.department.get_absolute_url }}">view details</a>
+    {% endfor %}
+</ul>
+    <p>{{ department }}</p>
+
+</body>
+</html>
