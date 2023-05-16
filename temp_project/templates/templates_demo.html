@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load filters %}
+{% load tags %}
+
+{% block page_content %}
+
+    <nav>
+        <a href="{% url 'index' %}" target="_blank">Go to index</a>
+    </nav>
+    <hr>
+    <h1>{{ title }}</h1>
+    <h1>{{ title|upper }}</h1>
+    <h1>{{ title|title }}</h1>
+    <h1>{{ title|capfirst }}</h1>
+    <h1>{{ title|truncatechars:5 }}</h1>
+    <p>{{ value }}</p>
+    <p>{{ info.address }}</p>
+    <p>{{ number|add:6 }}</p>
+    <p>{{ student|add:" xx"|add:' years' }}</p>
+    <p>{{ join|join:', ' }}</p>
+    <p>{{ date|date:"Y-m-d" }} - {{ date|date:"D" }}</p>
+    <p>{{ date|date:"h:m:s"|add:" hour" }}</p>
+    <p>{{ float_number|floatformat:10 }}</p>
+    <hr>
+    {% if students %}
+        <p>{{ students|join:" - " }}</p>
+    {% else %}
+        <p>There is no students</p>
+    {% endif %}
+    <hr>
+    <h4>Students:</h4>
+    <ul>
+        {% for stu in students %}
+            <li>{{ stu|upper }}</li>
+        {% empty %}
+            <li>no students</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h4>csrf_token</h4>
+    <p>{{ csrf_token }}</p>
+    <p>{% csrf_token %}</p>
+    <hr>
+    <h4>custom filter</h4>
+    <p>{{ values }}</p>
+    <p>{{ values|odd }} - this is with custom filter</p>
+    <p>{{ date|app_style }} - this is with custom filter</p>
+    <p>{% show_info student2 %} - this is with custom filter</p>
+{% endblock %}

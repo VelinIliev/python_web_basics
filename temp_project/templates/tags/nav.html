@@ -1,0 +1,7 @@
+<nav>
+    {% for url_name in url_names %}
+        <div>
+            <a href="{% url url_name %}">{{ url_name }}</a>
+        </div>
+    {% endfor %}
+</nav>

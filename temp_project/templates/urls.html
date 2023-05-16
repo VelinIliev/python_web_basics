@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if department_id or slug_info %}
+        {% if department_id %}
+            <h1>Department id - {{ department_id }}</h1>
+        {% endif %}
+        {% if slug_info %}
+            <h1>Slug - {{ slug_info }}</h1>
+        {% endif %}
+    {% else %}
+        <h1>No information</h1>
+    {% endif %}
+    <h2>Order by: {{ order_by }}</h2>
+    <hr>
+    <p>{{ request.GET }}</p>
+    <p>{{ request.POST }}</p>
+    <p>{{ request.META }}</p>
+    <p>{{ request.method }}</p>
+    <p>{{ request.path }}</p>
+    <p>{{ request.path_info }}</p>
+    <p>{{ request.content_params }}</p>
+    <p>{{ request.COOKIES }}</p>
+    <p>{{ request.get_host }}</p>
+    <p>{{ request.get_port }}</p>
+    <p>{{ request.get_full_path }}</p>
+    <p>{{ request.headers }}</p>
+
+</body>
+</html>

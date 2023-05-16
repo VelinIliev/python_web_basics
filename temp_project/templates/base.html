@@ -1,0 +1,20 @@
+{% load filters %}
+{% load static %}
+{% load tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% app_nav 'index' 'about' 'info'  %}
+
+    {% block page_content %}
+    {% endblock %}
+
+    {% include 'footer.html' %}
+</body>
+</html>
