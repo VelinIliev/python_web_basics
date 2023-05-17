@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <article>
+        {% for text in content %}
+            <p class="content">{{ text }}</p>
+        {% endfor %}
+    </article>
+
+{% endblock %}

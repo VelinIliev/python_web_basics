@@ -1,0 +1,26 @@
+
+nav>ul {
+    margin: 0;
+    display: flex;
+    justify-content: end;
+    background-color: #00000020;
+    box-shadow: 5px 5px 10px #EEEEEE;
+}
+
+nav>ul>li {
+    list-style: none;
+    margin: 10px;
+}
+
+nav>ul>li>a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: .7rem;
+}
+nav a:hover {
+    text-decoration: underline;
+    /*text-shadow: 1px 1px 10px lightgrey;*/
+}
+.icon-navigation {
+    margin-left: 0px;
+}

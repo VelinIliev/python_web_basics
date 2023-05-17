@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, sans-serif;
+    color: #FFF;
+    height: 100vh;
+    background-color: #08455f;
+    background: radial-gradient(ellipse at bottom, #08455f 10%, #022331 40%, #000c11 70%);
+}
+
+h1 {
+    text-align: center;
+}
+
+.content {
+
+    text-align: center;
+}
+
+.path {
+    font-size: .8rem;
+    /*margin-left: 20px;*/
+    margin: 20px;
+}
+
+article {
+    margin: 0 5rem ;
+}

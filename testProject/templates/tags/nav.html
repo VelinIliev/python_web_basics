@@ -1,0 +1,11 @@
+<nav>
+    <ul>
+    {% for url_name in url_tags %}
+        <li>
+            <a href="{% url url_name %}">{{ url_name|capfirst }}</a>
+        </li>
+    {% endfor %}
+        <li class="icon-navigation"> <a href="https://github.com/VelinIliev" target="_blank"><i class="fab fa-github"></i></a></li>
+        <li class="icon-navigation"> <a href="mailto:veliniliev@gmail.com"><i class="fa fa-at"></i></a></li>
+    </ul>
+</nav>

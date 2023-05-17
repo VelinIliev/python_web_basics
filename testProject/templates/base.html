@@ -1,0 +1,25 @@
+{% load static %}
+{% load nav_tag %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MainApp</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <script src="https://kit.fontawesome.com/ffc9b8fc23.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% app_nav 'home' 'about' 'contacts' %}
+    <p class="path">{{ request.get_full_path }}</p>
+
+    <h1>{{ title }}</h1>
+    <div class="wrapper">
+        {% block page_content %}
+        {% endblock %}
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

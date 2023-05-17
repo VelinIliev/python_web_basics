@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <article>
+        {% for text in content %}
+            <p class="content">{{ text }}</p>
+        {% endfor %}
+        <ul>
+        {% for property in other %}
+            <li>{{ property }}</li>
+        {% endfor %}
+        </ul>
+    </article>
+
+
+{% endblock %}
