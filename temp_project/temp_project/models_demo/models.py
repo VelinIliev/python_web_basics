@@ -1,8 +1,16 @@
 from django.db import models
 from datetime import date
 
+from django.urls import reverse
+
+from temp_project.models_demo.validators import validate_birthdate
+
 
 class Project(models.Model):
+    class Meta:
+        verbose_name = "Проект"
+        verbose_name_plural = 'Проекти'
+
     name = models.CharField(max_length=30)
     code_name = models.CharField(max_length=10, unique=True)
     deadline = models.DateField()
@@ -12,13 +20,26 @@ class Project(models.Model):
 
 
 class Department(models.Model):
+    class Meta:
+        verbose_name = "Отдел"
+        verbose_name_plural = 'Отдели'
+
     name = models.CharField(max_length=20)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return f'{self.name}'
 
+    def get_absolute_url(self):
+        return reverse('department details', kwargs={'pk': self.pk, 'slug': self.slug})
+
 
 class Employee(models.Model):
+    class Meta:
+        ordering = ['-department', 'first_name', 'last_name']
+        verbose_name = "Служител"
+        verbose_name_plural = 'Служители'
+
     first_name = models.CharField(max_length=30, null=False)
     last_name = models.CharField(max_length=40)
     email = models.EmailField(unique=True)
@@ -33,7 +54,7 @@ class Employee(models.Model):
         verbose_name="Seniority Level"
     )
     photo = models.URLField()
-    birthdate = models.DateField()
+    birthdate = models.DateField(validators=(validate_birthdate,))
     review = models.TextField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

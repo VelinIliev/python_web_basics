@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for employee in employees %}
+        <p>{{ employee.id }}. {{ employee.fullname }} </p>
+        <p>Department: <a href="{{ employee.department.get_absolute_url  }}">{{ employee.department.name }}</a></p>
+        <p>age: {{ employee.age }}</p>
+{#        <p>{{ employee.projects }}</p>#}
+        <a href="{% url 'delete employee' pk=employee.id %}">Delete User</a>
+{#        <a href="{{ employee.department.get_absolute_url  }}">Department Details</a>#}
+        <hr>
+    {% endfor %}
+    <hr>
+    <p>{{ one_employee.fullname }} - {{ one_employee.department.name }} - {{ one_employee.age }}</p>
+    <hr>
+    {% for employee in non_it %}
+        <p>{{ employee.first_name }} - {{ employee.department.name }}</p>
+    {% endfor %}
+    <p>{{ department.name }}</p>
+    <hr>
+    {% for employee in by_year %}
+        <p>{{ employee.first_name }} - {{ employee.department.name }}</p>
+    {% endfor %}
+    <hr>
+    {% for employee in by_department %}
+        <p>{{ employee.first_name }} - {{ employee.department.name }}</p>
+    {% endfor %}
+    <hr>
+    {% for depart in departments_new %}
+        <p>{{ depart.id }} - {{ depart.name }} - {{ depart.slug }}</p>
+    {% endfor %}
+
+</body>
+</html>
