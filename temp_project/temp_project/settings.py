@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'temp_project.projects',
     'temp_project.templates_demo',
     'temp_project.urls_and_views',
-    'temp_project.models_demo'
+    'temp_project.models_demo',
+    'temp_project.forms'
 ]
 
 MIDDLEWARE = [

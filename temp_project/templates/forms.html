@@ -1,0 +1,26 @@
+{% extends 'modelformsbase.html' %}
+
+{% block content %}
+    {% if name %}
+        <h1>Hello {{ name }}</h1>
+    {% else %}
+        <h1>Please, enter your name!</h1>
+    {% endif %}
+
+    <h2>Custom Form</h2>
+    <form action="{% url 'index forms' %}" method="post">
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}"><strong>{{ field.label_tag }}</strong></label>
+            <div>{{ field.errors }}</div>
+            <div>{{ field }}</div>
+        {% endfor %}
+        {% csrf_token %}
+        <button>Send IT!</button>
+    </form>
+    <h2>Manual Form</h2>
+    <form action="{% url 'index forms' %}" method="post">
+        {{ form.as_div }}
+        {% csrf_token %}
+        <button>Send IT!</button>
+    </form>
+{% endblock %}

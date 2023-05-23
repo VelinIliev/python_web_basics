@@ -1,0 +1,23 @@
+{% extends 'modelformsbase.html' %}
+
+{% block content %}
+    <h1>ModelsForms</h1>
+
+    <form action="{% url 'models forms' %}" method="post">
+        <h2>A</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Send IT!</button>
+    </form>
+    <form action="{% url 'models forms' %}" method="post">
+        <h2>C</h2>
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}"><strong>{{ field.label_tag }}</strong></label>
+            <div>{{ field.errors }}</div>
+            <div>{{ field }}</div>
+        {% endfor %}
+        {% csrf_token %}
+        <button>Send IT!</button>
+    </form>
+
+{% endblock %}
