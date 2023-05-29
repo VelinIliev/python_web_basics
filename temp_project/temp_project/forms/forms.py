@@ -1,6 +1,11 @@
-from django import forms
+import uuid
 
-from temp_project.forms.models import Person
+from django import forms
+from django.core.exceptions import ValidationError
+
+from temp_project.forms.model_validators import validate_max_todos_per_person
+from temp_project.forms.models import Person, Todo, Person2
+from temp_project.forms.validators import validate_text, validate_priority, ValueInRangeValidator
 
 
 class PersonForm(forms.Form):
@@ -88,3 +93,44 @@ class PersonCreateForm(forms.ModelForm):
         labels = {
             'age': "The age"
         }
+
+
+class TodoForm(forms.Form):
+    text = forms.CharField(
+        max_length=30,
+        validators=(validate_text,),
+        error_messages={
+            'required': "Това поле е задължително"
+        }
+    )
+    is_done = forms.BooleanField(required=False)
+    # priority = forms.IntegerField(validators=(validate_priority,))
+    priority = forms.IntegerField(validators=(ValueInRangeValidator(1, 10),))
+
+
+class TodoCreateForm(forms.ModelForm):
+    class Meta:
+        model = Todo
+        fields = '__all__'
+
+    def clean(self):
+        return super().clean()
+
+    def clean_text(self):
+        return self.cleaned_data['text'].lower()
+
+    def clean_assignee(self):
+        assignee = self.cleaned_data['assignee']
+        validate_max_todos_per_person(assignee)
+        return assignee
+
+
+class Person2CreateForm(forms.ModelForm):
+    class Meta:
+        model = Person2
+        fields = '__all__'
+
+    def clean_profile_image(self):
+        profile_image = self.cleaned_data['profile_image']
+        profile_image.name = str(uuid.uuid4())
+        return profile_image
