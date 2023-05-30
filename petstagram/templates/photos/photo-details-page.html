@@ -35,20 +35,23 @@
                             <br>
 
                             <!-- IF the photo has location -->
-                            <span>Bansko, Bulgaria</span>
+                            {% if photo.location %}
+                                <span>{{ photo.location }}</span>
+                            {% endif %}
 
                             <!-- IF the viewer is the creator of the photo -->
                             <div class="edit-delete-btns">
 
                                 <!-- Link to Edit Pet Photo Page -->
-                                <a href="#">
+                                <a href="{% url 'edit photo' pk=photo.pk %}">
                                     <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}"
                                          alt="edit button">
                                 </a>
 
                                 <!-- Link to Delete Pet Photo Page -->
-                                <a href="#">
-                                    <img class="bin-img" src="{% static 'images/icon-remove-22.jpg'%}" alt="bin button">
+                                <a href="{% url 'delete photo' pk=photo.pk %}">
+                                    <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}"
+                                         alt="bin button">
                                 </a>
                             </div>
                             <!-- End IF the viewer is the creator of the photo -->
@@ -62,7 +65,9 @@
                 <!-- Start Pet Photo -->
                 <div class="imgBx" id="place the id of the photo here">
                     <!-- Pet Photo -->
-                    <img src="{% static 'images/axolotl.jpeg' %}" alt="post" class="cover">
+                    <img src="{{ photo.photo.url }}"
+                         alt="photo of the pets {{ photo.tagged_pets.all|join:', ' }}"
+                         class="cover">
                 </div>
                 <!-- End Pet Photo -->
 
@@ -76,10 +81,11 @@
                             <span class="heart">
 
                                     <!-- Link to Like Path -->
-									<a href="#">
+									<a href="{% url 'like photo' photo_id=photo.pk %}">
 
 										<!-- IF user has liked the photo -->
-                                        <svg style="color: red"
+                                        {% if has_liked %}
+                                            <svg style="color: red"
                                              xmlns="http://www.w3.org/2000/svg"
                                              width="24"
                                              height="24"
@@ -95,7 +101,8 @@
                                         </svg>
 
                                         <!-- IF NOT user has liked the photo -->
-                                        <svg aria-label="Like"
+                                        {% else %}
+                                            <svg aria-label="Like"
                                              color="#262626"
                                              fill="#262626"
                                              height="24"
@@ -117,6 +124,7 @@
                                                     48 25 48 17.6c0-8-6-14.5-13.4-14.5z">
                                         </path>
                                         </svg>
+                                        {% endif %}
 								    </a>
                             </span>
                             <!-- End Like Button -->
@@ -141,7 +149,7 @@
                     <!-- End Like and Share Buttons Section -->
 
                     <!-- Number of Likes for the Photo -->
-                    <p class="likes">203 likes</p>
+                    <p class="likes">{{ likes_count }} likes</p>
 
                     <!-- Start Tagged Pets Section-->
                     <!-- Link to First Tagged Pet Details Page -->

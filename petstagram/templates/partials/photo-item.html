@@ -32,8 +32,9 @@
 
     <!-- Start Pet Photo -->
     <div class="imgBx" id="photo-{{ photo.pk }}">
-        <img src="{% static 'images/axolotl.jpeg' %}" alt="post" class="cover">
+        <img src="{{ photo.photo.url }}" alt="post" class="cover">
     </div>
+{#    <p>{{ photo.photo.url }}</p>#}
     <!-- End Pet Photo -->
 
     <!-- Start Like and Share Buttons -->
@@ -118,12 +119,13 @@
         {% endfor %}
 
         <!-- Link to Photo Details Page -->
-        <a href="{% url 'details photo' pk=photo.pk %} }}">
+        <a href="{% url "details photo" pk=photo.pk %}">
             <h4 class="details">See details</h4>
         </a>
 
         <!-- Date of Publication -->
         <h5 class="postTime">{{ photo.publication_date }}</h5>
+
         {% for comment in photo.comment_set.all %}
              <div class="comments">
                 <div class="top">
@@ -161,12 +163,18 @@
                 </h3>
             </div>
             <!-- Start Add Comments Form -->
-            <form method="post" action="#">
-                <label for="id_body">Body:</label>
-                <textarea name="body" cols="40" rows="10" placeholder="Add comment..." maxlength="300"
-                          required="" id="id_body"></textarea>
+            <form action="{% url 'comment photo' photo_id=photo.pk %}" method="post">
+                {% csrf_token %}
+{#                <p>{{ photo.pk }}</p>#}
+                {{ comment_form }}
                 <button type="submit">Post</button>
             </form>
+{#            <form method="post" action="#">#}
+{#                <label for="id_body">Body:</label>#}
+{#                <textarea name="body" cols="40" rows="10" placeholder="Add comment..." maxlength="300"#}
+{#                          required="" id="id_body"></textarea>#}
+{#                <button type="submit">Post</button>#}
+{#            </form>#}
             <!-- End Add Comments Form -->
 
         </div>

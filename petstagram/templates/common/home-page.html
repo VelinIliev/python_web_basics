@@ -6,12 +6,19 @@
         <div class="col-9">
 
             <!-- Start Searchbar Form -->
-            <form class="searchbar" method="post">
-                <input type="text" placeholder="Search by pet name...">
+            <form action="{% url 'index' %}" method="get" class="searchbar">
+                {% csrf_token %}
+                {{ search_form }}
                 <button>
                     <img src="{% static 'images/search.png' %}" height="18" alt="img2">
                 </button>
             </form>
+{#            <form class="searchbar" method="post">#}
+{#                <input type="text" placeholder="Search by pet name...">#}
+{#                <button>#}
+{#                    <img src="{% static 'images/search.png' %}" height="18" alt="img2">#}
+{#                </button>#}
+{#            </form>#}
             <!-- End Searchbar Form -->
 
             <!-- Start First Pet Photo Post -->
