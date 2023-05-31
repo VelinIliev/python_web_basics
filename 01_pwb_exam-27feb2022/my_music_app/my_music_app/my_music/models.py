@@ -15,6 +15,9 @@ class Album(models.Model):
         ("Other", "Other"),
     ]
 
+    class Meta:
+        ordering = ('pk',)
+
     name = models.CharField(
         unique=True,
         null=False,
