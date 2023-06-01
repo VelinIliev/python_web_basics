@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+    <!-- profile details section -->
+    <section id="plant-details">
+        <h1>Profile Details</h1>
+        <div class="info-section">
+            <div class="plant-header">
+                {% if not user.profile_picture %}
+                    <img class="plant-img" src="{% static 'images/default.jpg' %}" alt='{{ user.username }}'/>
+                {% else %}
+                    <img class="plant-img" src="{{ user.profile_picture }}" alt='{{ user.username }}-image'/>
+                {% endif %}
+                <h1>{{ user.first_name}} {{ user.last_name }}</h1>
+
+                <p class="description">Username: {{ user.username }}</p>
+
+                {% if count_stars == 0 %}
+                    <p class="description">Total stars: 0</p>
+                {% else %}
+                <p class="description">Total stars: </p>
+                    {% for star in count_stars %}
+                        <img class="star-img" src="{% static 'images/star3.png' %}" alt='profile-image'/>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="buttons">
+                    <a href="{% url 'profile edit' %}" class="edit-button">Edit</a>
+                    <a href="{% url 'profile delete' %}" class="delete-button">Delete</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
