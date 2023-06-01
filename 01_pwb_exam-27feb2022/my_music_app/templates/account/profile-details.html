@@ -9,17 +9,17 @@
             </div>
 
             <div class="profileText">
-                <!-- Profile Info -->
                 <h1>Username: {{ user.username }}</h1>
                 <h1>Email: {{ user.email }}</h1>
+
                 {% if user.age %}
                     <h1>Age: {{ user.age }}</h1>
                 {% endif %}
+
                 <h1>Albums: {{ number_of_albums }}</h1>
             </div>
 
             <div class="actionBtn">
-                <!-- Button for Deleting the Profile -->
                 <a href="{% url 'profile delete' %}" class="remove">Delete</a>
             </div>
 

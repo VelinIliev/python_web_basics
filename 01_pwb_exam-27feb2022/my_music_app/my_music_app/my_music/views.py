@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from my_music_app.my_music.forms import CreateAlbumForm, EditAlbumForm, DeleteAlbumForm, CreateAccountForm
+from my_music_app.my_music.forms import CreateAlbumForm, EditAlbumForm, DeleteAlbumForm, CreateAccountForm, \
+    DeleteAccountForm
 from my_music_app.my_music.models import Album, Profile
 
 
@@ -17,11 +18,10 @@ def index(request):
     profile = get_profile()
 
     if profile is None:
-        return redirect('profile add')
+        return profile_add(request)
 
     context = {
         'albums': Album.objects.all(),
-        'is_logged': True
     }
 
     return render(request, 'common/home-with-profile.html', context=context)
@@ -38,7 +38,7 @@ def profile_add(request):
 
     context = {
         'form': form,
-        'is_logged': False,
+        'not_logged': True,
     }
     return render(request, 'common/home-no-profile.html', context)
 
@@ -75,9 +75,10 @@ def album_edit(request, pk):
         form = EditAlbumForm(request.POST, instance=album)
         if form.is_valid():
             form.save()
-            return redirect('album details', pk=pk)
+            return redirect('index')
     context = {
-        'form': form
+        'form': form,
+        'album': album,
     }
     return render(request, 'album/edit-album.html', context=context)
 
@@ -85,15 +86,19 @@ def album_edit(request, pk):
 def album_delete(request, pk):
     album = Album.objects.filter(pk=pk).get()
 
-    if request.method == "POST":
-        album.delete()
-        return redirect('index')
-
-    form = DeleteAlbumForm(instance=album)
+    if request.method == "GET":
+        form = DeleteAlbumForm(instance=album)
+    else:
+        form = DeleteAlbumForm(request.POST, instance=album)
+        if form.is_valid:
+            form.save()
+            return redirect('index')
 
     context = {
-        'form': form
+        'form': form,
+        'album': album,
     }
+
     return render(request, 'album/delete-album.html', context=context)
 
 
@@ -108,8 +113,17 @@ def profile_details(request):
 
 
 def profile_delete(request):
-    if request.method == "POST":
-        # delete user
-        # delete albums
-        return redirect('index')
-    return render(request, 'account/profile-delete.html')
+    profile = get_profile()
+
+    if request.method == "GET":
+        form = DeleteAccountForm(instance=profile)
+    else:
+        form = DeleteAccountForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'account/profile-delete.html', context)

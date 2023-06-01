@@ -1,22 +1,39 @@
+from enum import Enum
+
 from django.db import models
 
 from my_music_app.my_music.validators import price_validator, username_min_length, username_content
 
 
+class AlbumGenres(Enum):
+    POP = "Pop Music"
+    JAZZ = "Jazz Music"
+    RNB = "R&B Music"
+    ROCK = "Rock Music"
+    COUNTRY = "Country Music"
+    DANCE = "Dance Music"
+    HIPHOP = "Hip Hop Music"
+    OTHER = "Other"
+
+    @classmethod
+    def choices(cls):
+        return [(x.name, x.value) for x in cls]
+
+
 class Album(models.Model):
-    GENRE_CHOICES = [
-        ("Pop Music", "Pop Music"),
-        ("Jazz Music", "Jazz Music"),
-        ("R&B Music", "R&B Music"),
-        ("Rock Music", "Rock Music"),
-        ("Country Music", "Country Music"),
-        ("Dance Music", "Dance Music"),
-        ("Hip Hop Music", "Hip Hop Music"),
-        ("Other", "Other"),
-    ]
+    # GENRE_CHOICES = [
+    #     ("Pop Music", "Pop Music"),
+    #     ("Jazz Music", "Jazz Music"),
+    #     ("R&B Music", "R&B Music"),
+    #     ("Rock Music", "Rock Music"),
+    #     ("Country Music", "Country Music"),
+    #     ("Dance Music", "Dance Music"),
+    #     ("Hip Hop Music", "Hip Hop Music"),
+    #     ("Other", "Other"),
+    # ]
 
     class Meta:
-        ordering = ('pk',)
+        ordering = ('genre', 'artist', 'name')
 
     name = models.CharField(
         unique=True,
@@ -33,7 +50,7 @@ class Album(models.Model):
         null=False,
         blank=False,
         max_length=30,
-        choices=GENRE_CHOICES,
+        choices=AlbumGenres.choices(),
     )
     description = models.CharField(
         null=True,

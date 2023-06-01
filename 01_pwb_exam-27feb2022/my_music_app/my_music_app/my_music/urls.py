@@ -6,7 +6,6 @@ from my_music_app.my_music.views import index, profile_details, profile_delete, 
 urlpatterns = [
     path("", index, name='index'),
 
-    path("profile/add/", profile_add, name='profile add'),
     path("profile/details/", profile_details, name='profile details'),
     path("profile/delete/", profile_delete, name='profile delete'),
 
