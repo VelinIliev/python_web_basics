@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+
+{% block page_content %}
+    <section id="game-details">
+        <h1>Game Details</h1>
+        <div class="info-section">
+            <div class="game-header">
+                <img class="game-img"
+                     src="{{ game.image_url }}"
+                     alt='{{ game.title }} image'/>
+                <h1>{{ game.title }} <span class="levels">Rating: {{ game.rating }}</span></h1>
+                <p><span class="type">Category: {{ game.category }}</span></p>
+                {% if game.max_level %}
+                    <p><span class="type">Max Level: {{ game.max_level }}</span></p>
+                {% endif %}
+            </div>
+            {% if game.summary %}
+                <p class="text">
+                    {{ game.summary }}
+                </p>
+            {% endif %}
+
+            <!-- Edit/Delete buttons -->
+            <div class="buttons">
+                <a href="{% url 'game edit' pk=game.id %}" class="button">Edit</a>
+                <a href="{% url 'game delete' pk=game.id %}" class="button">Delete</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
