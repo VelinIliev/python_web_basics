@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <!-- Profile Page -->
+    <section id="profile-page" class="details">
+        <div class="profile-information">
+            <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+            {% if not user.image_url %}
+                <p class="img"><img
+                        src="https://thumbs.dreamstime.com/b/profile-picture-vector-perfect-social-media-other-web-use-125320533.jpg"
+                        alt="{{ user.first_name }} - image">
+                </p>
+            {% else %}
+                <p class="img"><img
+                        src="{{ user.image_url }}"
+                        alt="{{ user.first_name }} - image">
+                </p>
+            {% endif %}
+            <div class="actions">
+                <a class="button" href="{% url 'profile edit' %}">Edit</a>
+                <a class="button" href="{% url 'profile delete' %}">Delete</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
