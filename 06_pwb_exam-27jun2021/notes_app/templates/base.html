@@ -1,0 +1,31 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <title>Notes</title>
+</head>
+
+<body>
+<header>
+    <nav>
+        <ul>
+            <li class="img"><img src="{% static 'images/note.png' %}"/></li>
+            <li><a href="/">Notes</a></li>
+            <li class="right">
+                <a href="/add">Add Note</a>
+                <a href="/profile">Profile</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{% block page_content %}
+{% endblock %}
+
+<footer>
+    <div>Python Web Basics Exam @SoftUni</div>
+</footer>
+</body>
+</html>

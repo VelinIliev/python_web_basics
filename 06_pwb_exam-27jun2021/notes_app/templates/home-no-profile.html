@@ -1,0 +1,37 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        <title>Notes</title>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li class="img"><img src="{% static 'images/note.png' %}" width="32" height="32" /></li>
+                    <li><a href="/">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="body">
+            <h1>Enter Your Data</h1>
+            <div class="form" >
+                <form method="POST" action="{% url 'index' %}">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="97MmAxmrs7yPXUamEdIgRY80OHEP383f6VukAC6agPNIW60LqTcnIQlM6YCYPjc0" />
+                    <label for="firstName">First Name</label>
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="SUBMIT" />
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            <div>Python Web Basics Exam @SoftUni</div>
+        </footer>
+    </body>
+</html>
